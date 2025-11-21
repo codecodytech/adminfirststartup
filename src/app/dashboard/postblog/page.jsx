@@ -156,13 +156,42 @@ const PostBlog = () => {
             <input type="text" name="metaDescription" value={formData.metaDescription} onChange={handleChange} placeholder="Meta Description" className="w-full px-4 py-3 rounded-lg border dark:bg-zinc-700 dark:text-white" />
             <input type="text" name="tags" value={formData.tags} onChange={handleChange} placeholder="Tags" className="w-full px-4 py-3 rounded-lg border dark:bg-zinc-700 dark:text-white" />
             <input type="text" name="writerName" value={formData.writerName} onChange={handleChange} placeholder="Writer Name" className="w-full px-4 py-3 rounded-lg border dark:bg-zinc-700 dark:text-white" />
-            <select name="category" value={formData.category} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border dark:bg-zinc-700 dark:text-white">
+            {/* <select name="category" value={formData.category} onChange={handleChange} className="w-full px-4 py-3 rounded-lg border dark:bg-zinc-700 dark:text-white">
               <option value="">Select Category</option>
               <option value="Technology">Technology</option>
               <option value="Lifestyle">Lifestyle</option>
               <option value="Health">Health</option>
               <option value="Education">Education</option>
-            </select>
+            </select> */}
+
+            {/* here is new */}
+            {/* Category Select + Custom Category Input */}
+            <div className="flex flex-col gap-3">
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg border dark:bg-zinc-700 dark:text-white"
+              >
+                <option value="">Select Category</option>
+                <option value="Technology">Technology</option>
+                <option value="Lifestyle">Lifestyle</option>
+                <option value="Health">Health</option>
+                <option value="Education">Education</option>
+              </select>
+
+              {/* Custom Category Input */}
+              <input
+                type="text"
+                name="category"
+                placeholder="Or write custom category"
+                value={formData.category}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-lg border dark:bg-zinc-700 dark:text-white"
+              />
+            </div>
+
+            {/* end */}
           </div>
 
           {/* Image Upload */}
@@ -202,3 +231,11 @@ const PostBlog = () => {
 };
 
 export default PostBlog;
+
+
+// old corrected code is above
+
+
+
+
+
