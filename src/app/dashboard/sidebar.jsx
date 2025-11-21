@@ -83,7 +83,7 @@ export default Sidebar;
 
 // Menu Items Array with paths
 const menuItems = [
-  { label: "Dashboard", icon: Home, path: "/" },
+  { label: "Dashboard", icon: Home, path: "/dashboard" },
   { 
     label: "Blogs", 
     icon: User, 
