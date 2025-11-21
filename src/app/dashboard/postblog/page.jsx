@@ -1,7 +1,21 @@
 "use client";
 import React, { useState } from "react";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+
+import dynamic from "next/dynamic";
+
+// Dynamically import CKEditor along with ClassicEditor
+const CKEditor = dynamic(async () => {
+  const { CKEditor } = await import("@ckeditor/ckeditor5-react");
+  const ClassicEditor = (await import("@ckeditor/ckeditor5-build-classic")).default;
+  return (props) => <CKEditor {...props} editor={ClassicEditor} />;
+}, { ssr: false });
+
+
+
+
 
 const PostBlog = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +32,8 @@ const PostBlog = () => {
     writerName: "",
     images: null,
   });
+
+
 
   const [responseMessage, setResponseMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -126,14 +142,22 @@ const PostBlog = () => {
             <label className="block text-gray-700 dark:text-gray-300 font-medium mb-2">
               Content
             </label>
-            <CKEditor
+            {/* <CKEditor
               editor={ClassicEditor}
               data={formData.content}
               onChange={(event, editor) => {
                 const data = editor.getData();
                 setFormData({ ...formData, content: data });
               }}
+            /> */}
+
+            <CKEditor
+              data={formData.content}
+              onChange={(event, editor) => {
+                setFormData({ ...formData, content: editor.getData() });
+              }}
             />
+
           </div>
 
           {/* Rest of your fields like excerpt, SEO, tags, category, images */}
@@ -251,3 +275,9 @@ const PostBlog = () => {
 };
 
 export default PostBlog;
+
+
+
+
+
+
