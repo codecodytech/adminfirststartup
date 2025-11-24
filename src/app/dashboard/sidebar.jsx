@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Home, User, Settings, Bell, BarChart2, LogOut, Edit, BookOpen } from "lucide-react";
+import { Home, User, Settings, Bell, BarChart2, LogOut, Edit, BookOpen,BookImage,Boxes,CalendarPlus,Eye } from "lucide-react";
 
 const Sidebar = () => {
   const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
@@ -86,13 +86,20 @@ const menuItems = [
   { label: "Dashboard", icon: Home, path: "/dashboard" },
   { 
     label: "Blogs", 
-    icon: User, 
+    icon: BookImage, 
     children: [
       { label: "Post Blog", icon: Edit, path: "/dashboard/postblog" },
       { label: "Read Blogs", icon: BookOpen, path: "/dashboard/readblog" },
     ]
+  },{
+    label: "Users", icon: User, path: "/dashboard/users",
   },
-  { label: "Notifications", icon: Bell, path: "/notifications" },
-  { label: "Analytics", icon: BarChart2, path: "/analytics" },
-  { label: "Settings", icon: Settings, path: "/settings" },
+  { 
+    label: "Category", 
+    icon: Boxes, 
+    children: [
+      { label: "Add Category", icon: CalendarPlus, path: "/dashboard/addcategory" },
+      { label: "View Category", icon: Eye, path: "/dashboard/viewcategory" },
+    ]
+  }
 ];

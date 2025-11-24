@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +11,13 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loginStatus = localStorage.getItem('loginStatus')
+    if (loginStatus) {
+      router.push("/dashboard");
+    }
+  }, [])
 
   const handleLogin = async (e) => {
     e.preventDefault(); // prevent page reload
@@ -39,10 +46,9 @@ export default function Home() {
         localStorage.setItem("loginStatus", "true");
 
         toast.success(data.responseMessage || "Login Successful!");
+        router.push("/dashboard");
 
-        setTimeout(() => {
-          router.push("/dashboard"); // redirect to dashboard
-        }, 1000);
+
       } else {
         toast.error(data.responseMessage || "Invalid credentials");
       }
