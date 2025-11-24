@@ -61,7 +61,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen w-full flex bg-[whitesmoke] dark:bg-black">
+    <div className="min-h-screen w-full flex bg-[linear-gradient(135deg,#0a3d62,#dff0ff)] dark:bg-blue">
       <ToastContainer position="top-right" autoClose={3000} />
 
       {/* LEFT SIDE (Centered Card) */}

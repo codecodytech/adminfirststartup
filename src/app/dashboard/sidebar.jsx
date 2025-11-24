@@ -2,14 +2,24 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Home, User, Settings, Bell, BarChart2, LogOut, Edit, BookOpen,BookImage,Boxes,CalendarPlus,Eye } from "lucide-react";
+import { Home, User, Settings, Bell, BarChart2, LogOut, Edit, BookOpen, BookImage, Boxes, CalendarPlus, Eye } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Sidebar = () => {
   const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
+  const router = useRouter();
 
   const handleDropdown = (label) => {
     setOpenDropdown(openDropdown === label ? null : label);
   };
+
+  const handleLogout=(e)=>{
+    e.preventDefault();
+    localStorage.removeItem('loginStatus')
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    router.push('/')
+  }
 
   return (
     <div
@@ -70,7 +80,7 @@ const Sidebar = () => {
 
       {/* Footer */}
       <div className="mt-auto px-4 py-4 border-t border-zinc-200 dark:border-zinc-700">
-        <button className="flex items-center gap-3 px-4 py-3 w-full rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-blue-600 hover:text-white transition-all group">
+        <button className="flex items-center gap-3 px-4 py-3 w-full rounded-lg text-zinc-700 dark:text-zinc-300 hover:bg-blue-600 hover:text-white transition-all group" onClick={handleLogout}>
           <LogOut size={20} className="group-hover:stroke-white" />
           <span className="text-sm font-medium">Logout</span>
         </button>
@@ -84,19 +94,19 @@ export default Sidebar;
 // Menu Items Array with paths
 const menuItems = [
   { label: "Dashboard", icon: Home, path: "/dashboard" },
-  { 
-    label: "Blogs", 
-    icon: BookImage, 
+  {
+    label: "Blogs",
+    icon: BookImage,
     children: [
       { label: "Post Blog", icon: Edit, path: "/dashboard/postblog" },
       { label: "Read Blogs", icon: BookOpen, path: "/dashboard/readblog" },
     ]
-  },{
+  }, {
     label: "Users", icon: User, path: "/dashboard/users",
   },
-  { 
-    label: "Category", 
-    icon: Boxes, 
+  {
+    label: "Category",
+    icon: Boxes,
     children: [
       { label: "Add Category", icon: CalendarPlus, path: "/dashboard/addcategory" },
       { label: "View Category", icon: Eye, path: "/dashboard/viewcategory" },
